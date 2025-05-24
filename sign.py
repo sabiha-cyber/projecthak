@@ -3,8 +3,12 @@ import firebase_admin
 from firebase_admin import firestore, credentials, auth
 import json
 import requests
-import re
+import os
 from chatbot import price_advice
+from dotenv import load_dotenv
+
+load_dotenv()
+api_key = os.getenv("FIREBASE_API_KEY")
 
 valid_admin_usernames = ["admin123", "muzna", "cs_head", "professor1"]
 valid_admin_emails = ["admin@university.edu", "muzna@csdept.edu", "faculty@college.edu"]
@@ -36,7 +40,7 @@ def app():
                 "returnSecureToken": True,
                 "displayName": username
             })
-            r = requests.post(url, params={"key": "AIzaSyAXNnzMMHirvViR6qe_rED4q5yHranAQYE"}, data=payload)
+            r = requests.post(url, params={"key": api_key}, data=payload)
             res = r.json()
             if "email" in res:
                 role = "admin" if username in valid_admin_usernames or st.session_state.email_input in valid_admin_emails else "student"
@@ -62,7 +66,7 @@ def app():
                 "password": password,
                 "returnSecureToken": True
             })
-            r = requests.post(url, params={"key": "AIzaSyAXNnzMMHirvViR6qe_rED4q5yHranAQYE"}, data=payload)
+            r = requests.post(url, params={"key": api_key}, data=payload)
             res = r.json()
             if "email" in res:
                 user_ref = db.collection("users").document(res['email']).get()
@@ -88,7 +92,7 @@ def app():
                 "email": email,
                 "requestType": "PASSWORD_RESET"
             })
-            r = requests.post(url, params={"key": "AIzaSyAXNnzMMHirvViR6qe_rED4q5yHranAQYE"}, data=payload)
+            r = requests.post(url, params={"key": api_key}, data=payload)
             return r.status_code == 200, "Reset email sent" if r.status_code == 200 else r.json()
         except Exception as e:
             return False, str(e)
