@@ -1,15 +1,15 @@
 import streamlit as st
-
+st.set_page_config(
+        page_title="TRADE-IN",
+)
 from streamlit_option_menu import option_menu
 import os
 from dotenv import load_dotenv
 load_dotenv()
 
 #import home, trending, sign, your, about, buy_me_a_coffee
-import sign2,admin
-st.set_page_config(
-        page_title="Pondering",
-)
+import admin,chatbot,market,messenger,sign,profile,map
+
 
 
 st.markdown(
@@ -23,6 +23,7 @@ st.markdown(
             gtag('config', os.getenv('analytics_tag'));
         </script>
     """, unsafe_allow_html=True)
+
 print(os.getenv('analytics_tag'))
 
 
@@ -42,9 +43,9 @@ class MultiApp:
         # app = st.sidebar(
         with st.sidebar:        
             app = option_menu(
-                menu_title='Pondering ',
-                options=['Home','Account','Trending','Admin','about','Buy_me_a_coffee'],
-                icons=['house-fill','person-circle','trophy-fill','chat-fill','info-circle-fill'],
+                menu_title='TRADE-IN ',
+                options=['Profile','Account','Market','Student-Admin panel','Chatbot','Chatapp', 'Map'],
+                icons=['info-circle','person-circle','shop','bookmark-fill','robot','chat', 'geo-alt'],
                 menu_icon='chat-text-fill',
                 default_index=1,
                 styles={
@@ -58,9 +59,19 @@ class MultiApp:
         
         
         if app == "Account":
-            sign2.app()
-        if app == 'Admin':
+            sign.app()
+        if app == 'Student-Admin panel':
             admin.app()
+        if app == "Chatbot":
+            chatbot.app()
+        if app == "Market":
+            market.app()
+        if app == "Chatapp":
+            messenger.app()
+        if app == "Profile":
+            profile.app()
+        if app == "Map":
+            map.app()
              
           
              

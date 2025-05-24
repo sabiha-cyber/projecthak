@@ -1,0 +1,11 @@
+id,title,description,category,type,condition,service_type,pricing_mode,price,min_bid,current_bid,visibility,university,created_at,seller
+1,Calculus Textbook,Excellent condition calculus textbook for beginners,Textbook,Tangible Item,Like New,,Fixed Price,45.0,,,All registered students,Islamic University of Technology,2023-11-15 14:30:00,student1
+2,Python Tutoring,Experienced tutor for Python programming,Tutoring,Service,,Tutoring,Hourly Rate,25.0,,,Only students from my university,BUET,2023-11-16 09:15:00,student2
+3,Used Laptop,2-year-old laptop in good condition,Gadgets,Tangible Item,Good,,Bidding,,150.0,175.0,All registered students,DU,2023-11-17 16:45:00,student3
+4,Graphic Design,Logo and banner design services,Skill Exchange,Service,,Skill Exchange,Fixed Price,100.0,,,Only students from my university,Islamic University of Technology,2023-11-18 11:20:00,student4
+5,Physics Textbook,University physics vol 1,Textbook,Tangible Item,Fair,,Fixed Price,30.0,,,All registered students,BUET,2023-11-19 13:10:00,student5
+6,physics textbook,,Textbook,Tangible Item,New,,Fixed Price,0.0,,,Only students from my university,Islamic University of Technology,2025-05-24 16:45:29,Current User
+7,physics textbook,,Textbook,Tangible Item,New,,Fixed Price,0.0,,,Only students from my university,Islamic University of Technology,2025-05-24 16:45:33,Current User
+8,headphone,,Gadgets,Tangible Item,New,,Fixed Price,0.07,,,Only students from my university,Islamic University of Technology,2025-05-24 16:47:18,Current User
+9,book,,Textbook,Tangible Item,Good,,Fixed Price,0.0,,,Only students from my university,Islamic University of Technology,2025-05-24 17:34:09,Current User
+10,book,,Textbook,Tangible Item,Good,,Fixed Price,0.0,,,Only students from my university,Islamic University of Technology,2025-05-24 17:34:14,Current User

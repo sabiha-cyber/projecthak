@@ -3,14 +3,24 @@ import firebase_admin
 from firebase_admin import firestore, credentials, auth
 import json
 import requests
+import re
+from chatbot import price_advice
+
+valid_admin_usernames = ["admin123", "muzna", "cs_head", "professor1"]
+valid_admin_emails = ["admin@university.edu", "muzna@csdept.edu", "faculty@college.edu"]
+valid_domains = ["@iut-dhaka.edu", "@du.ac.bd", "@buet.ac.bd"]
+def is_valid_uni_email(email):
+    return email.endswith(tuple(valid_domains))
 
 # Firebase setup
-cred = credentials.Certificate("json_code.json")
-firebase_admin.initialize_app(cred)
+if not firebase_admin._apps:
+    cred = credentials.Certificate("json_code.json")
+    firebase_admin.initialize_app(cred)
+
 db = firestore.client()
 
 def app():
-    st.title('Welcome to :violet[Pondering] :sunglasses:')
+    st.title('Welcome to :violet[our shop] 🛍️')
 
     # Session states
     for key in ['username', 'useremail', 'role', 'signedout', 'signout']:
@@ -29,11 +39,14 @@ def app():
             r = requests.post(url, params={"key": "AIzaSyAXNnzMMHirvViR6qe_rED4q5yHranAQYE"}, data=payload)
             res = r.json()
             if "email" in res:
+                role = "admin" if username in valid_admin_usernames or st.session_state.email_input in valid_admin_emails else "student"
                 db.collection("users").document(res['email']).set({
                     "email": res['email'],
                     "username": username,
-                    "role": "student",
-                    "suspended": False
+                    "role": role,
+                    "suspended": False,
+                    "dob": st.session_state.dob.strftime("%Y-%m-%d"),
+                    "phone": st.session_state.number  # storing number here
                 })
                 return res['email']
             else:
@@ -96,21 +109,28 @@ def app():
         for key in ['username', 'useremail', 'role', 'signedout', 'signout']:
             st.session_state[key] = ''
 
-    # Auth form
     if not st.session_state["signedout"]:
         choice = st.selectbox('Login/Signup', ['Login', 'Sign up'])
         st.session_state.email_input = st.text_input('Email Address')
         st.session_state.password_input = st.text_input('Password', type='password')
 
         if choice == 'Sign up':
-            username = st.text_input("Enter your unique username")
+            st.session_state.username = st.text_input("Enter your unique username")
+            st.session_state.uni = st.text_input("Enter your uni name")
+            st.session_state.number = st.text_input("Enter your number")
+            st.session_state.dob = st.date_input("Enter your date of birth")
+
             if st.button('Create my account'):
-                sign_up_with_email_and_password(
-                    st.session_state.email_input,
-                    st.session_state.password_input,
-                    username
-                )
-                st.success('Account created! Please log in.')
+                if not is_valid_uni_email(st.session_state.email_input):
+                    st.error(f"Invalid organisation")
+                else:
+                    result = sign_up_with_email_and_password(
+                        st.session_state.email_input,
+                        st.session_state.password_input,
+                        st.session_state.username
+                    )
+                    if result:
+                        st.success('Account created! Please log in.')
         else:
             st.button('Login', on_click=handle_login)
             with st.expander("Forgot password?"):
@@ -119,7 +139,6 @@ def app():
                     success, msg = reset_password(email)
                     st.success(msg) if success else st.error(msg)
 
-    # Post-login view
     if st.session_state.signout:
         st.success(f"Welcome {st.session_state.username}!")
         st.info(f"Role: {st.session_state.role}")
