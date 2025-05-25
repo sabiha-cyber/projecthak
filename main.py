@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 #import home, trending, sign, your, about, buy_me_a_coffee
-import admin,chatbot,market,messenger,sign,profile,map
+import admin,chatbot,market,messenger,sign,profile,map,block
 
 
 
@@ -44,8 +44,8 @@ class MultiApp:
         with st.sidebar:        
             app = option_menu(
                 menu_title='TRADE-IN ',
-                options=['Profile','Account','Market','Student-Admin panel','Chatbot','Chatapp', 'Map'],
-                icons=['info-circle','person-circle','shop','bookmark-fill','robot','chat', 'geo-alt'],
+                options=['Profile','Account','Market','Student-Admin panel','Chatbot','Chatapp', 'Map', 'Block-transac'],
+                icons=['info-circle','person-circle','shop','bookmark-fill','robot','chat', 'geo-alt', 'cash'],
                 menu_icon='chat-text-fill',
                 default_index=1,
                 styles={
@@ -72,6 +72,8 @@ class MultiApp:
             profile.app()
         if app == "Map":
             map.app()
+        if app == "Block-transac":
+            block.app()
              
           
              

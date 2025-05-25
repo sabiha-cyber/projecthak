@@ -230,4 +230,3 @@ def app():
                     st.write(f"**Phone**: {users[selected_user]['phone']}")
             else:
                 st.warning("No users found in Firestore.")
-

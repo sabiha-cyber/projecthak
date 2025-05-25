@@ -9,3 +9,4 @@ id,title,description,category,type,condition,service_type,pricing_mode,price,min
 8,headphone,,Gadgets,Tangible Item,New,,Fixed Price,0.07,,,Only students from my university,Islamic University of Technology,2025-05-24 16:47:18,Current User
 9,book,,Textbook,Tangible Item,Good,,Fixed Price,0.0,,,Only students from my university,Islamic University of Technology,2025-05-24 17:34:09,Current User
 10,book,,Textbook,Tangible Item,Good,,Fixed Price,0.0,,,Only students from my university,Islamic University of Technology,2025-05-24 17:34:14,Current User
+11,phone,,Textbook,Tangible Item,Good,,Fixed Price,6000.0,,,All registered students,BUET,2025-05-25 00:18:44,mue
