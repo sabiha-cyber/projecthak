@@ -97,7 +97,11 @@
 - Role and suspension status dictate available UI components and permissions.
 
 ---
+## Block payment system:
+- Secured payment through block chain technology using infuro
 
+## Wishlist:
+- Added a wishlist in marketplace
 ## How to Run
 
 1. Clone the repository:
