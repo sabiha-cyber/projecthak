@@ -22,7 +22,7 @@ def app():
     if address:
         if web3.is_address(address):
             balance = web3.eth.get_balance(address)
-            st.write(f"Balance of {address}: {Web3.from_wei(balance, 'ether')} ETH")
+            st.write(f"Balance : {Web3.from_wei(balance, 'ether')} ETH")
         else:
             st.error("Invalid Ethereum address")
 
